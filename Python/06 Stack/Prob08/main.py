@@ -4,13 +4,22 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def solution(s):
+    stack = []
+    for c in s:
+        if (c == '('):
+            stack.append(c)
+        elif(c == ')'):
+            if(len(stack) == 0):
+                return False
+            else:
+                stack.pop()
 
+    if(len(stack) == 0):
+        return True
+    else:
+        return False
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
+print(solution('(())()'))
+print(solution('((())()'))
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
