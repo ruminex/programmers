@@ -19,10 +19,80 @@
 
 2. 방향 그래프(Directed Graph)에서 사이클(Cycle) 존재 여부를 판별하기 위해 DFS를 어떻게 활용할 수 있는지 구체적인 알고리즘을 설명해주세요
 
+방향 그래프를 DFS를 통해서 경로를 탐색하는 중, 사이클이 존재 하는지 아닌지를 판별하는 알고리즘으로는
+
+현재 탐색 경로상에 있는 노드를 다시 방문할 경우 사이클이 존재한다고 할 수 있습니다.
+
+이를 위해 노드를 다음 세 가지 상태 중 하나로 관리합니다:
+
+방문 전 (B = 0)
+
+현재 탐색 경로상에 있음 (V = 1)
+
+방문 완료 (E = 2)
+
+DFS를 활용한 사이클 판별 알고리즘 코드
+
+def has_cycle(n, graph):
+    visited = [0] * n  # 0: B, 1: V, 2: E
+
+    def dfs(node):
+        if visited[node] == 1:
+            return True  # 사이클 발견
+        if visited[node] == 2:
+            return False  # 이미 끝난 경로
+
+        visited[node] = 1  # 방문 중
+        for neighbor in graph[node]:
+            if dfs(neighbor):
+                return True
+
+        visited[node] = 2  # 방문 완료
+        return False
+
+    for i in range(n):
+        if visited[i] == 0:
+            if dfs(i):
+                return True
+
+    return False
 
 3. 재귀를 활용한 DFS에서 가장 최근의 노드로 돌아가는 백트래킹 동작이 어떤 방식으로 동작하는지 하나의 예를 들어 설명해주세요
 
-4. 
+재귀를 활용한 DFS에서 백트래킹 동작은 호출된 재귀함수가 종료 되었을 때, 시스템 스택에 가장 최근에 호출 되었던 함수를 다시 불러와서 실행시키는 방식으로 이루어져 있습니다.
+
+재귀 함수 dfs를 구현하고
+def dfs(node, visited, graph):
+    visited[node] = True
+    print(f"Enter Node {node}")
+
+    for neighbor in graph[node]:
+        if not visited[neighbor]:
+            dfs(neighbor, visited, graph)
+
+    print(f"Exit Node {node}")  # 백트래킹 위치
+
+예제 그래프를 이런식으로 만들었다고 가정시
+graph = {
+    0: [1, 2],
+    1: [0, 3],
+    2: [0],
+    3: [1]
+}
+visited = [False] * 4
+
+이런식으로 결과물이 나오게 됩니다.
+
+Enter Node 0
+Enter Node 1
+Enter Node 3
+Exit Node 3
+Exit Node 1
+Enter Node 2
+Exit Node 2
+Exit Node 0
+
+
 
 풀어볼 문제
 
