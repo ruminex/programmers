@@ -36,68 +36,69 @@
 
     DFS를 활용한 사이클 판별 알고리즘 코드
 
-    def has_cycle(n, graph):
-        visited = [0] * n  # 0: B, 1: V, 2: E
+       def has_cycle(n, graph):
+           visited = [0] * n  # 0: B, 1: V, 2: E
 
-        def dfs(node):
-            if visited[node] == 1:
-            return True  # 사이클 발견
-        if visited[node] == 2:
-            return False  # 이미 끝난 경로
+       def dfs(node):
+           if visited[node] == 1:
+           return True  # 사이클 발견
+       if visited[node] == 2:
+           return False  # 이미 끝난 경로
 
-        visited[node] = 1  # 방문 중
-        for neighbor in graph[node]:
-            if dfs(neighbor):
-                return True
+       visited[node] = 1  # 방문 중
+       for neighbor in graph[node]:
+           if dfs(neighbor):
+           return True
 
         visited[node] = 2  # 방문 완료
         return False
 
-    for i in range(n):
-        if visited[i] == 0:
-            if dfs(i):
-                return True
+       for i in range(n):
+           if visited[i] == 0:
+           if dfs(i):
+              return True
 
-    return False
-
-
+       return False
 
 
-3. 재귀를 활용한 DFS에서 가장 최근의 노드로 돌아가는 백트래킹 동작이 어떤 방식으로 동작하는지 하나의 예를 들어 설명해주세요
+
+
+4. 재귀를 활용한 DFS에서 가장 최근의 노드로 돌아가는 백트래킹 동작이 어떤 방식으로 동작하는지 하나의 예를 들어 설명해주세요
 
     재귀를 활용한 DFS에서 백트래킹 동작은 호출된 재귀함수가 종료 되었을 때, 시스템 스택에 가장 최근에 호출 되었던 함수를 다시 불러와서 실행시키는 방식으로 이루어져 있습니다.
 
     재귀 함수 dfs를 구현하고
-    def dfs(node, visited, graph):
-        visited[node] = True
-        print(f"Enter Node {node}")
 
-    for neighbor in graph[node]:
-        if not visited[neighbor]:
-            dfs(neighbor, visited, graph)
+       def dfs(node, visited, graph):
+           visited[node] = True
+           print(f"Enter Node {node}")
 
-    print(f"Exit Node {node}")  # 백트래킹 위치
+       for neighbor in graph[node]:
+           if not visited[neighbor]:
+               dfs(neighbor, visited, graph)
+
+       print(f"Exit Node {node}")  # 백트래킹 위치
 
     예제 그래프를 이런식으로 만들었다고 가정시
 
-    graph = {
-        0: [1, 2],
-        1: [0, 3],
-        2: [0],
-        3: [1]
-    }
-    visited = [False] * 4
+       graph = {
+           0: [1, 2],
+           1: [0, 3],
+           2: [0],
+           3: [1]
+       }
+       visited = [False] * 4
 
     이런식으로 결과물이 나오게 됩니다.
 
-    Enter Node 0
-    Enter Node 1
-    Enter Node 3
-    Exit Node 3
-    Exit Node 1
-    Enter Node 2
-    Exit Node 2
-    Exit Node 0
+       Enter Node 0
+       Enter Node 1
+       Enter Node 3
+       Exit Node 3
+       Exit Node 1
+       Enter Node 2
+       Exit Node 2
+       Exit Node 0
 
 
 
