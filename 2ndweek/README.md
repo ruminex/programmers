@@ -52,4 +52,4 @@ BFS 알고리즘을 통해서 그래프를 탐색하게 될 경우에, 현재 �
 
    [정답](https://github.com/ruminex/programmers/blob/main/2ndweek/Gms.py)
 
-4. 경주로 건
+4. [경주로 건](https://school.programmers.co.kr/learn/courses/30/lessons/67259)
